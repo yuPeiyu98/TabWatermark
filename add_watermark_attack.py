@@ -154,8 +154,7 @@ def genMixtureGaussData(n, k=5):
 
     ma = np.eye(k)[np.random.choice(k, n)]
 
-    return np.sum(mv * ma, axis=0)
-
+    return np.sum(mv * ma, axis=1)
 
 def simulateMultiColDataAttack(n=10, c=10, pro=0.90, sigma=10, m=1000):
     # create green list
