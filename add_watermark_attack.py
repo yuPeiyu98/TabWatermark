@@ -213,8 +213,8 @@ def main(args):
     # n = 1000, 5 wm tabs with 5 original tabs
     # simulateData(n=1000, m=args.m)
     
-    for n_ in [10, 100, 1000, 5000]:
-        for c_ in [10, 100, 1000]:
+    for n_ in [10, 100, 5000]:
+        for c_ in [10, 100]:
             for p_ in [0.5, 0.75, 0.9, 0.95]:
                 for s_ in [1e-3, 0.1, 1, 10]:
                     simulateMultiColDataAttack(n=n_, c=c_, pro=p_, sigma=s_, m=1000)
