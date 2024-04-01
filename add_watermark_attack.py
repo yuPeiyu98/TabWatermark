@@ -149,12 +149,23 @@ def simulateData(n=10, m=1000):
         tab_wm = singleColumnWatermark(tab, g_list)
         print("Binom: {:.8f}, Gauss: {:.8f}".format(binomTesting(tab_wm, g_list), gaussTesting(tab_wm, g_list)))
 
+def genMixtureGaussData(n, k=5):
+    mv = np.random.randn(1, k) + np.random.randn(n, k)
+
+    ma = np.eye(k)[np.random.choice(k, n)]
+
+    return np.sum(mv * ma, axis=0)
+
+
 def simulateMultiColDataAttack(n=10, c=10, pro=0.90, sigma=10, m=1000):
     # create green list
     g_lists = [getGreenList(m=m) for __ in range(c)]
 
-    tab_lists_wm_sing = [np.random.randn(n) for __ in range(c)]
-    tab_lists_wm_all = [np.random.randn(n) for __ in range(c)] 
+    # tab_lists_wm_sing = [np.random.randn(n) for __ in range(c)]
+    # tab_lists_wm_all = [np.random.randn(n) for __ in range(c)]
+
+    tab_lists_wm_sing = [genMixtureGaussData(n=n) for __ in range(c)]
+    tab_lists_wm_all = [genMixtureGaussData(n=n) for __ in range(c)] 
 
     print("############# n = {}, c = {}, p = {}, sigma = {} #############".format(n, c, pro, sigma))
 
