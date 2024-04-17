@@ -135,6 +135,11 @@ def gaussMultTesting(arrs, green_lists, m):
     p = chi2.cdf(X, len(arrs))
     return 1 - p
 
+def genMixtureGaussData(n, k=5):
+    mv = np.random.randn(1, k) + np.random.randn(n, k)
+    ma = np.eye(k)[np.random.choice(k, n)]
+    return np.sum(mv * ma, axis=1)
+
 def simulateData(n=10, m=1000):
     tab_list_wm = [np.random.randn(n) for __ in range(5)]
     tab_list_nwm = [np.random.randn(n) for __ in range(5)]
@@ -143,11 +148,11 @@ def simulateData(n=10, m=1000):
 
     print("############# n = {} #############".format(n))
     for tab in tab_list_nwm:
-        print("Binom: {:.8f}, Gauss: {:.8f}".format(binomTesting(tab, g_list), gaussTesting(tab, g_list)))
+        print("Binom: {:.8f}, Gauss: {:.8f}".format(binomTesting(tab, g_list, m), gaussTesting(tab, g_list, m)))
 
     for tab in tab_list_wm:
-        tab_wm = singleColumnWatermark(tab, g_list)
-        print("Binom: {:.8f}, Gauss: {:.8f}".format(binomTesting(tab_wm, g_list), gaussTesting(tab_wm, g_list)))
+        tab_wm = singleColumnWatermark(tab, g_list, m)
+        print("Binom: {:.8f}, Gauss: {:.8f}".format(binomTesting(tab_wm, g_list, m), gaussTesting(tab_wm, g_list, m)))
 
 def simulateMultiColData(n=10, c=10, m=1000):
     # create green list
@@ -187,25 +192,25 @@ def main(args):
 
     ### simulate data
     # n = 10, 5 wm tabs with 5 original tabs
-    # simulateData(n=10, m=args.m)
+    simulateData(n=10, m=args.m)
 
     # n = 100, 5 wm tabs with 5 original tabs
-    # simulateData(n=100, m=args.m)
+    simulateData(n=100, m=args.m)
 
     # n = 1000, 5 wm tabs with 5 original tabs
-    # simulateData(n=1000, m=args.m)
+    simulateData(n=1000, m=args.m)
     
-    simulateMultiColData(n=10, c=10, m=1000)
-    simulateMultiColData(n=100, c=10, m=1000)
-    simulateMultiColData(n=1000, c=10, m=1000)
+    simulateMultiColData(n=10, c=10, m=10000)
+    simulateMultiColData(n=100, c=10, m=10000)
+    simulateMultiColData(n=1000, c=10, m=10000)
 
-    simulateMultiColData(n=10, c=100, m=1000)
-    simulateMultiColData(n=100, c=100, m=1000)
-    simulateMultiColData(n=1000, c=100, m=1000)
+    simulateMultiColData(n=10, c=100, m=10000)
+    simulateMultiColData(n=100, c=100, m=10000)
+    simulateMultiColData(n=1000, c=100, m=10000)
 
-    simulateMultiColData(n=10, c=1000, m=1000)
-    simulateMultiColData(n=100, c=1000, m=1000)
-    simulateMultiColData(n=1000, c=1000, m=1000)
+    simulateMultiColData(n=10, c=1000, m=10000)
+    simulateMultiColData(n=100, c=1000, m=10000)
+    simulateMultiColData(n=1000, c=1000, m=10000)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

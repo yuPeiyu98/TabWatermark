@@ -1,0 +1,248 @@
+##### adding watermark #####
+
+import argparse
+import numpy as np
+import os
+import os.path as osp
+import random
+import time
+
+from scipy.stats import binom
+from scipy.stats import norm
+from scipy.stats import chi2
+
+def getGreenList(lo=0, hi=1, m=1000):
+    """ return a list of tuple, representing the green list
+    """
+
+    waymarks = np.linspace(lo, hi, m + 1)
+
+    green_list = []
+    for i in range(0, m, 2):
+        # select $delta_i^{2k}$ in equ.(2) with prob.
+        if np.random.uniform() > .5:
+            i += 1
+        green_list.append([waymarks[i], waymarks[i + 1]])
+
+    return green_list
+
+def singleColumnWatermark(arr, green_list, m):
+    arr_wm = arr.copy()
+
+    for i in range(len(arr_wm)):
+        # offset elem to [0, 1]
+        e_flr = np.floor(arr_wm[i])
+        e = arr_wm[i] - e_flr
+
+        g = findNearestIntervalHash(e, green_list, m)
+
+        if e > g[1] or e < g[0]:
+            # if x[i] falls outside of the range, then
+            # we re-sample the elem. from a uniform dist.
+            e_wm = np.random.uniform(g[0], g[1]) 
+            arr_wm[i] = e_wm + e_flr
+
+        else:
+            e_wm = e
+
+        # print("elem: {}, int: {}, {}, elem_wm: {}, ofst: {}".format(e, g[0], g[1], e_wm, e_flr))
+
+    return arr_wm
+
+def findNearestInterval(e, green_list):
+    """ return the nearest interval to the given element e
+    """
+
+    min_dist, min_indx = np.inf, -1
+
+    # offset elem to [0, 1]
+    e = e - np.floor(e)
+
+    for i, intv in enumerate(green_list):
+        cur_dist = np.abs(e - (intv[0] + intv[1]) / 2)
+
+        if cur_dist < min_dist:
+            min_dist = cur_dist
+            min_indx = i
+
+    return green_list[min_indx]
+
+def findNearestIntervalHash(e, green_list, m):
+    """ return the nearest interval to the given element e
+    """
+
+    min_dist, min_indx = np.inf, -1
+
+    # offset elem to [0, 1]
+    e = e - np.floor(e)
+
+    # hashing
+    idx_c = int(e // (2 / m))
+    idx_l0, idx_r0 = max(0, idx_c - 1), min(idx_c + 1, len(green_list) - 1)
+    idx_l1, idx_r1 = max(0, idx_c - 2), min(idx_c + 2, len(green_list) - 1)
+
+    local_g_list = [green_list[idx_l1], green_list[idx_l0], green_list[idx_c], green_list[idx_r0], green_list[idx_r1]]
+    for i, intv in enumerate(local_g_list):
+        cur_dist = np.abs(e - (intv[0] + intv[1]) / 2)
+
+        if cur_dist < min_dist:
+            min_dist = cur_dist
+            min_indx = i
+
+    return local_g_list[min_indx]
+
+def countElemInGreenList(arr, green_list, m):
+    T = 0
+
+    for e in arr:
+        g = findNearestIntervalHash(e, green_list, m)
+
+        e_ofst = e - np.floor(e)
+
+        T += (e_ofst <= g[1] and e_ofst >= g[0])
+        # print(g[0], g[1], e, e_ofst)
+
+    return T
+
+def binomTesting(arr, green_list, m):
+    T = countElemInGreenList(arr, green_list, m)
+    p = binom.cdf(T, len(arr), 0.5)
+    # print(T)
+    return 1 - p
+
+def gaussTesting(arr, green_list, m):
+    T = countElemInGreenList(arr, green_list, m)
+
+    mv = len(arr) / 2
+    std = np.sqrt(len(arr)) / 2
+    p = norm.cdf((T - mv) / std)
+    # print(T)
+    return 1 - p    
+
+def gaussMultTesting(arrs, green_lists, m):
+    X = 0
+
+    mv = len(arrs[0]) / 2
+    std = np.sqrt(len(arrs[0])) / 2
+
+    for arr, green_list in zip(arrs, green_lists):
+        T = countElemInGreenList(arr, green_list, m)
+        # print(T)
+
+        T_c = (T - mv) / std
+        X += T_c ** 2
+
+    p = chi2.cdf(X, len(arrs))
+    return 1 - p
+
+def genMixtureGaussData(n, k=5):
+    mv = np.random.randn(1, k) + np.random.randn(n, k)
+    ma = np.eye(k)[np.random.choice(k, n)]
+    return np.sum(mv * ma, axis=1)
+
+def simulateData(n=10, m=1000, T=1000, a=0.005):
+    tab_list_wm = [np.random.randn(n) for __ in range(T)]
+    tab_list_nwm = [np.random.randn(n) for __ in range(T)]
+    # create green list
+    g_list = getGreenList(m=m)
+
+    print("############# n = {} #############".format(n))
+    binom_nwm, gauss_nwm = 0, 0
+    for tab in tab_list_nwm:
+        binom_nwm += int(binomTesting(tab, g_list, m) > a)
+        gauss_nwm += int(gaussTesting(tab, g_list, m) > a)
+    print("Binom nwm acc: {:.8f}, Gauss nwm acc: {:.8f}".format(binom_nwm / T, gauss_nwm / T))
+
+    binom_wm, gauss_wm = 0, 0
+    for tab in tab_list_wm:
+        tab_wm = singleColumnWatermark(tab, g_list, m)
+        binom_wm += int(binomTesting(tab_wm, g_list, m) < a)
+        gauss_wm += int(gaussTesting(tab_wm, g_list, m) < a)
+    print("Binom wm acc: {:.8f}, Gauss wm acc: {:.8f}".format(binom_wm / T, gauss_wm / T))
+    print("Overall acc: {:.8f}, Overall acc: {:.8f}".format((binom_wm + binom_nwm) / (2 * T), (gauss_wm + gauss_nwm) / (2 * T)))
+
+def simulateMultiColData(n=10, c=10, m=1000, T=1000, a=0.005):
+    # create green list
+    g_lists = [getGreenList(m=m) for __ in range(c)]
+
+    print("############# n = {}, c = {} #############".format(n, c))
+    chi_nwm, chi_sing_wm, chi_mult_wm = 0, 0, 0
+    for __ in range(T):    
+        tab_lists_no_wm = [np.random.randn(n) for __ in range(c)]
+        tab_lists_wm_sing = [np.random.randn(n) for __ in range(c)]
+        tab_lists_wm_all = [np.random.randn(n) for __ in range(c)] 
+
+        chi_nwm += int(gaussMultTesting(tab_lists_no_wm, g_lists, m) > a)
+
+        tab_lists_wm_sing[0] = singleColumnWatermark(tab_lists_wm_sing[0], g_lists[0], m)
+
+        for i, tab in enumerate(tab_lists_wm_all):
+            tab_lists_wm_all[i] = singleColumnWatermark(tab, g_lists[i], m)
+
+        chi_sing_wm += int(gaussMultTesting(tab_lists_wm_sing, g_lists, m) < a)
+
+        chi_mult_wm += int(gaussMultTesting(tab_lists_wm_all, g_lists, m) < a)
+
+    print("nwm acc: {:.8f}".format(chi_nwm / T))
+
+    print("sing col acc: {:.8f}, sing col overall acc: {:.8f}".format(chi_sing_wm / T, (chi_nwm + chi_sing_wm) / (2 * T)))
+
+    print("all col acc: {:.8f}, all col overall acc: {:.8f}".format(chi_mult_wm / T, (chi_nwm + chi_mult_wm) / (2 * T)))
+
+def main(args):
+    # initialize random seed
+    # torch.manual_seed(args.seed)
+    # torch.cuda.manual_seed_all(args.seed)
+    np.random.seed(args.seed)
+    random.seed(args.seed)
+
+    # g_list = getGreenList(m=1000)
+
+    # dummy_g_data = []
+    # for i in range(100):
+    #     g_idx = np.random.randint(low=0, high=len(g_list))
+    #     dummy_g_data.append(np.random.uniform(g_list[g_idx][0], g_list[g_idx][1]))
+
+    # T = countElemInGreenList(dummy_g_data, g_list)
+
+    # print(T)
+
+    ### simulate data
+    # n = 10, 5 wm tabs with 5 original tabs
+    simulateData(n=10, m=args.m)
+    simulateData(n=20, m=args.m)
+    simulateData(n=30, m=args.m)
+    simulateData(n=56, m=args.m)
+
+    # n = 100, 5 wm tabs with 5 original tabs
+    simulateData(n=100, m=args.m)
+    simulateData(n=180, m=args.m)
+    simulateData(n=316, m=args.m)
+    simulateData(n=562, m=args.m)
+
+    # n = 1000, 5 wm tabs with 5 original tabs
+    simulateData(n=1000, m=args.m)
+    
+    # simulateMultiColData(n=10, c=10, m=10000)
+    # simulateMultiColData(n=100, c=10, m=10000)
+    # simulateMultiColData(n=1000, c=10, m=10000)
+
+    # simulateMultiColData(n=10, c=100, m=10000)
+    # simulateMultiColData(n=100, c=100, m=10000)
+    # simulateMultiColData(n=1000, c=100, m=10000)
+
+    # simulateMultiColData(n=10, c=1000, m=10000)
+    # simulateMultiColData(n=100, c=1000, m=10000)
+    # simulateMultiColData(n=1000, c=1000, m=10000)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--seed', type=int, default=1, help='random seed')
+    # parser.add_argument('--dataset', type=str, default='cifar10')
+    # parser.add_argument('--data_path', type=str, default='../../noise_mixture_nce/ncebm_torch/data', help='data path')
+    
+    # gridding parameters
+    parser.add_argument('--m', type=int, default=10000, help='')
+
+    args = parser.parse_args()
+    main(args)
