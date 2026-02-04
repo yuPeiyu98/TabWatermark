@@ -1,4 +1,4 @@
-# TabWatermark — Root-folder Repro Guide
+# TabWatermark — Repro Guide
 
 This README documents **only the root-level scripts** in this repository and explains how to reproduce the **tables (Tab. *) and figures (Fig. *)** reported by the code.  
 The `real_data/` folder is intentionally **excluded**, as it already has its own README.
