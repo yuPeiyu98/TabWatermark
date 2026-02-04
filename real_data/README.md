@@ -64,6 +64,24 @@ python exp_soft_watermark.py
 # Run wasserstein distance experiment
 python exp_wasserstein.py
 ```
+### Utility Evaluation Before and After Watermarking
+
+We evaluate the utility of synthetic tabular data using the official utility
+evaluation pipeline provided by the TabDDPM repository.
+
+The evaluation procedure is as follows:
+
+1. Train tabular generative models (TabDDPM / CTGAN / TVAE) and generate synthetic
+   datasets following the original TabDDPM implementation.
+2. Measure the utility of the generated data using TabDDPM's provided evaluation
+   code.
+3. Apply our watermarking method to the generated synthetic data.
+4. Replace the original synthetic data with the watermarked version and
+   re-run the same TabDDPM utility evaluation code.
+
+The only difference between the two evaluations is the presence of watermarking
+in the synthetic data. All evaluation metrics, models, and procedures remain
+unchanged.
 
 ### Using Core Functions
 
