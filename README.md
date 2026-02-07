@@ -60,7 +60,7 @@ python kde_plot_fig_3.py --seed 1
 **Outputs:**
 - `0_before.png`, `0_after.png`, `1_before.png`, `1_after.png`, …
 
-Each pair corresponds to one synthetic column.
+Each pair corresponds to one synthetic column. In our manuscript, we display the figures for the first column.
 
 ---
 
