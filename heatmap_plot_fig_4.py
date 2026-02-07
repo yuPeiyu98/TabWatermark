@@ -204,14 +204,26 @@ def CovMultiColData(n=10, c=10, m=1000):
     U, S, V = np.linalg.svd(diff, full_matrices=True)
 
     mask = np.triu(np.ones_like(diff, dtype=bool))
-    fig, ax = plt.subplots()
-    # ax = sns.heatmap(diff, mask=mask, cmap="YlGnBu", vmin=-1.0, vmax=1.0)
-    # ax = sns.heatmap(corr_wm_all, mask=mask, cmap="YlGnBu", vmin=-1.0, vmax=1.0)
-    ax = sns.heatmap(corr_no_wm, mask=mask, cmap="YlGnBu", vmin=-1.0, vmax=1.0)
+    # ===== plot corr_diff =====
+    plt.figure()
+    sns.heatmap(diff, mask=mask, cmap="YlGnBu", vmin=-1.0, vmax=1.0)
     plt.axis('off')
-    # plt.savefig('corr_diff_n{}_c{}_m{}.png'.format(n, c, m), dpi=1200)
-    # plt.savefig('corr_wm_all_n{}_c{}_m{}.png'.format(n, c, m), dpi=1200)
+    plt.savefig('corr_diff_n{}_c{}_m{}.png'.format(n, c, m), dpi=1200)
+    plt.close()
+
+    # ===== plot corr_wm_all =====
+    plt.figure()
+    sns.heatmap(corr_wm_all, mask=mask, cmap="YlGnBu", vmin=-1.0, vmax=1.0)
+    plt.axis('off')
+    plt.savefig('corr_wm_all_n{}_c{}_m{}.png'.format(n, c, m), dpi=1200)
+    plt.close()
+
+    # ===== plot corr_no_wm =====
+    plt.figure()
+    sns.heatmap(corr_no_wm, mask=mask, cmap="YlGnBu", vmin=-1.0, vmax=1.0)
+    plt.axis('off')
     plt.savefig('corr_no_wm_n{}_c{}_m{}.png'.format(n, c, m), dpi=1200)
+    plt.close()
 
     print(cov_no_wm.shape, cov_wm_all.shape, S.shape)
 
