@@ -88,11 +88,7 @@ python add_watermark_curves_fig_5_ab.py --seed 1 --m 10000
 ```
 
 **Outputs:**
-- Printed accuracies for non-watermarked and watermarked columns
-
-Recommended:
-```bash
-python add_watermark_curves_fig_5_ab.py --seed 1 --m 10000 | tee fig5_ab.log
+- Figure 5 (a,b)
 ```
 
 ---
