@@ -102,12 +102,9 @@ python add_watermark_attack_curves_fig_5_cd.py --seed 1 --m 1000
 ```
 
 **Outputs:**
-- Printed pre-attack and post-attack accuracies
+- Figure 5 (c,d)
 
-Recommended:
-```bash
-python add_watermark_attack_curves_fig_5_cd.py --seed 1 --m 1000 | tee fig5_cd.log
-```
+
 
 ---
 
