@@ -159,7 +159,7 @@ python gamma_watermark_guessing_attack_tab_5.py --seed 1 --m 1000 | tee tab5.log
 
 ---
 
-#### p-Watermark sensitivity table
+#### q-Watermark sensitivity table
 **Script:** `p_watermark.py`
 
 **Run:**
@@ -168,7 +168,7 @@ python p_watermark.py --seed 1 --m 1000
 ```
 
 **Outputs:**
-- Printed TPR, TNR, and AUC for different p settings
+- Printed TPR, TNR, and AUC for different q settings(Table 18 in the Appendix)
 
 ---
 
