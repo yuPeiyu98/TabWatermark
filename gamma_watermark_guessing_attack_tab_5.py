@@ -207,7 +207,7 @@ def main(args):
 
     N = 100
 
-    for n in [10, 100, 100]:
+    for n in [100, 1000]:
         for p in [10, 100, 1000]:
             for gamma in [0.3, 0.5, 0.7]:
                 for m_ in [20, 200, 2000]:
