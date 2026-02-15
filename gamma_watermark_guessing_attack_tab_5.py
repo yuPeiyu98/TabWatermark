@@ -216,7 +216,7 @@ def main(args):
                         p_no_wm, p_wm = simulateMultiColData(n=n, p=p, m_=m_, gamma=gamma)
                         p_no_wm_list.append(p_no_wm)
                         p_wm_list.append(p_wm)
-                    print("############# n = {}, p = {}, gamma = {}, m_ = {} #############".format(n, p, gamma, m_))
+                    print("############# n = {}, p = {}, gamma = {}, m_ = {} #############".format(n, p, gamma, m_//2))
                     n_tp = (np.array(p_wm_list) < alpha).sum()
                     n_tn = (np.array(p_no_wm_list) >= alpha).sum()
                     print("TPR: {:.5f}, TNR: {:.5f}".format(n_tp / N, n_tn / N))
