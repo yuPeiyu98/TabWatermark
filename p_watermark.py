@@ -208,7 +208,7 @@ def main(args):
 
     N = 100
 
-    for n in [10, 100, 100]:
+    for n in [10, 100, 1000]:
         for p in [10, 100, 1000]:
             for p_ in [0.3, 0.5, 0.7]:
                 p_no_wm_list, p_wm_list = [], []
