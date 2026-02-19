@@ -64,7 +64,7 @@ python exp_soft_watermark.py
 # Run wasserstein distance experiment
 python exp_wasserstein.py
 ```
-### Utility Evaluation Before and After Watermarking
+### Utility Evaluation Before and After Watermarking (used in Table 4)
 
 We evaluate the utility of synthetic tabular data using the official utility
 evaluation pipeline provided by the TabDDPM repository.
