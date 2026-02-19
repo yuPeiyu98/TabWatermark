@@ -74,7 +74,7 @@ The evaluation procedure is as follows:
 1. Train tabular generative models (TabDDPM / CTGAN / TVAE) and generate synthetic
    datasets following the original TabDDPM implementation.
 2. Measure the utility of the generated data using TabDDPM's provided evaluation
-   code.
+   code (https://github.com/yandex-research/tab-ddpm/blob/main/scripts/eval_catboost.py). 
 3. Apply our watermarking method to the generated synthetic data.
 4. Replace the original synthetic data with the watermarked version and
    re-run the same TabDDPM utility evaluation code.
