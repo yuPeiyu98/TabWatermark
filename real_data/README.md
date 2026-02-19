@@ -7,7 +7,7 @@ This repository contains the implementation of watermarking methods for syntheti
 ```
 tabular_watermark/
 ├── watermark.py           # Core watermarking functions
-├── run_experiment.py      # Common experiment utilities
+├── run_experiment.py      # Common experiment utilities (used in Table 2)
 ├── scripts/
 │   ├── exp_know_guess_attack.py    # Guess attack (known mean/std)
 │   ├── exp_guess_attack.py         # Guess attack (unknown mean/std)
