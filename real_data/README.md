@@ -9,7 +9,7 @@ tabular_watermark/
 ├── watermark.py           # Core watermarking functions
 ├── run_experiment.py      # Common experiment utilities (used in Table 2)
 ├── scripts/
-│   ├── exp_know_guess_attack.py    # Guess attack (known mean/std)
+│   ├── exp_know_guess_attack.py    # Guess attack (known mean/std) (used in Table 6)
 │   ├── exp_guess_attack.py         # Guess attack (unknown mean/std)
 │   ├── exp_rewm_attack.py          # Re-watermarking attack
 │   ├── exp_noise_attack.py         # Additive noise attack (used in Table 3)
