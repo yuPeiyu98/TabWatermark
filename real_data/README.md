@@ -12,7 +12,7 @@ tabular_watermark/
 │   ├── exp_know_guess_attack.py    # Guess attack (known mean/std)
 │   ├── exp_guess_attack.py         # Guess attack (unknown mean/std)
 │   ├── exp_rewm_attack.py          # Re-watermarking attack
-│   ├── exp_noise_attack.py         # Additive noise attack
+│   ├── exp_noise_attack.py         # Additive noise attack (used in Table 3)
 │   ├── exp_wasserstein.py         # Evaluate wasserstein distance (used in Tables 1, 13, and 14)
 │   └── exp_soft_watermark.py       # Soft watermarking experiment
 └── README.md
