@@ -1,0 +1,181 @@
+import argparse
+import numpy as np
+import random
+
+from scipy.stats import binom
+from scipy.stats import norm
+from scipy.stats import chi2
+
+from sklearn.metrics import roc_auc_score
+
+
+def getGreenList(lo=0, hi=1, m=1000):
+    waymarks = np.linspace(lo, hi, m + 1)
+
+    green_list = []
+    for i in range(0, m, 2):
+        if np.random.uniform() > 0.5:
+            i += 1
+        green_list.append([waymarks[i], waymarks[i + 1]])
+
+    return green_list
+
+
+def findNearestIntervalHash(e, green_list, m):
+    min_dist, min_indx = np.inf, -1
+    e = e - np.floor(e)
+
+    idx_c = int(e // (2 / m))
+    idx_l0, idx_r0 = max(0, idx_c - 1), min(idx_c + 1, len(green_list) - 1)
+    idx_l1, idx_r1 = max(0, idx_c - 2), min(idx_c + 2, len(green_list) - 1)
+
+    local_g_list = [
+        green_list[idx_l1],
+        green_list[idx_l0],
+        green_list[idx_c],
+        green_list[idx_r0],
+        green_list[idx_r1],
+    ]
+
+    for i, intv in enumerate(local_g_list):
+        cur_dist = np.abs(e - (intv[0] + intv[1]) / 2)
+        if cur_dist < min_dist:
+            min_dist = cur_dist
+            min_indx = i
+
+    return local_g_list[min_indx]
+
+
+def singleColumnWatermark(arr, green_list, m):
+    arr_wm = arr.copy()
+
+    for i in range(len(arr_wm)):
+        e_flr = np.floor(arr_wm[i])
+        e = arr_wm[i] - e_flr
+
+        g = findNearestIntervalHash(e, green_list, m)
+
+        if e > g[1] or e < g[0]:
+            e_wm = np.random.uniform(g[0], g[1])
+            arr_wm[i] = e_wm + e_flr
+
+    return arr_wm
+
+
+def countElemInGreenList(arr, green_list, m):
+    T = 0
+    for e in arr:
+        g = findNearestIntervalHash(e, green_list, m)
+        e_ofst = e - np.floor(e)
+        T += (e_ofst <= g[1] and e_ofst >= g[0])
+    return T
+
+
+def binomTesting(arr, green_list, m):
+    T = countElemInGreenList(arr, green_list, m)
+    p = binom.cdf(T, len(arr), 0.5)
+    return 1 - p
+
+
+def gaussTesting(arr, green_list, m):
+    T = countElemInGreenList(arr, green_list, m)
+    mv = len(arr) / 2
+    std = np.sqrt(len(arr)) / 2
+    p = norm.cdf((T - mv) / std)
+    return 1 - p
+
+
+def gaussMultTesting(arrs, green_lists, m):
+    X = 0.0
+    mv = len(arrs[0]) / 2
+    std = np.sqrt(len(arrs[0])) / 2
+
+    for arr, green_list in zip(arrs, green_lists):
+        T = countElemInGreenList(arr, green_list, m)
+        T_c = (T - mv) / std
+        X += T_c ** 2
+
+    p = chi2.cdf(X, len(arrs))
+    return 1 - p  # p-value style: smaller => more watermarked
+
+
+def simulateMultiColData_return_scores(n=10, c=10, m=1000, T=30, g_lists=None):
+    """
+    Return arrays of detector p-values for:
+      - watermark one column
+      - watermark all columns
+      - no watermark
+    """
+    if g_lists is None:
+        g_lists = [getGreenList(m=m) for _ in range(c)]
+
+    one_ps, all_ps, nwm_ps = [], [], []
+
+    for _ in range(T):
+        tab_lists_no_wm = [np.random.randn(n) for __ in range(c)]
+        tab_lists_wm_sing = [np.random.randn(n) for __ in range(c)]
+        tab_lists_wm_all = [np.random.randn(n) for __ in range(c)]
+
+        nwm_ps.append(gaussMultTesting(tab_lists_no_wm, g_lists, m))
+
+        tab_lists_wm_sing[0] = singleColumnWatermark(tab_lists_wm_sing[0], g_lists[0], m)
+        one_ps.append(gaussMultTesting(tab_lists_wm_sing, g_lists, m))
+
+        for i, tab in enumerate(tab_lists_wm_all):
+            tab_lists_wm_all[i] = singleColumnWatermark(tab, g_lists[i], m)
+        all_ps.append(gaussMultTesting(tab_lists_wm_all, g_lists, m))
+
+    return np.array(one_ps), np.array(all_ps), np.array(nwm_ps)
+
+
+def main(args):
+    n_list = [10, 100, 1000]
+    p_list = [10, 100, 1000]
+    T = 30
+    runs = [1, 2, 3]
+
+    np.random.seed(0)
+    random.seed(0)
+    fixed_keys = {p: [getGreenList(m=args.m) for _ in range(p)] for p in p_list}
+
+    print("AUC-ROC using raw p-values as scores (score = -pval):\n")
+
+    for p in p_list:
+        g_lists = fixed_keys[p]
+        for n in n_list:
+            one_all, all_all, nwm_all = [], [], []
+
+            for seed in runs:
+                np.random.seed(seed)
+                random.seed(seed)
+
+                one_p, all_p, nwm_p = simulateMultiColData_return_scores(
+                    n=n, c=p, m=args.m, T=T, g_lists=g_lists
+                )
+                one_all.append(one_p)
+                all_all.append(all_p)
+                nwm_all.append(nwm_p)
+
+            one_p = np.concatenate(one_all)
+            all_p = np.concatenate(all_all)
+            nwm_p = np.concatenate(nwm_all)
+
+            # ROC/AUC expects larger score => more "positive" (watermarked).
+            # Your p-values: smaller => more watermarked, so use score = -p.
+            y_one = np.concatenate([np.ones_like(one_p), np.zeros_like(nwm_p)])
+            s_one = np.concatenate([-one_p, -nwm_p])
+            auc_one = roc_auc_score(y_one, s_one)
+
+            y_all = np.concatenate([np.ones_like(all_p), np.zeros_like(nwm_p)])
+            s_all = np.concatenate([-all_p, -nwm_p])
+            auc_all = roc_auc_score(y_all, s_all)
+
+            print(f"p={p}, n={n}: AUC(one-col vs nwm)={auc_one:.4f}, AUC(all-cols vs nwm)={auc_all:.4f}")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--seed", type=int, default=1, help="random seed (kept for compatibility)")
+    parser.add_argument("--m", type=int, default=1000, help="grid size m")
+    args = parser.parse_args()
+    main(args)
