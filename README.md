@@ -21,6 +21,9 @@ Scripts covered here:
 - `gamma_watermark_guessing_attack_tab_5.py`
 - `p_watermark.py`
 - `soft_robustness_tab_8.py`
+- `add_watermark_tab_10.py`
+- `add_watermark_tab_11.py`
+- `add_watermark_attack_tab_12.py`
 
 Most table scripts **print results to stdout**.  
 Most figure scripts **save `.png` files** to the current working directory.
