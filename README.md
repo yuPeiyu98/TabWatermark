@@ -195,6 +195,14 @@ python soft_robustness_tab_8.py | tee tab8.log
 
 ---
 
+#### Tab. 10 in Appendix
+**Script:** `add_watermark_tab_10.py`
+
+**Run:**
+```bash
+python add_watermark_tab_10.py --m 1000
+```
+
 ## 3) Utility / sanity scripts
 
 ### Basic watermark sanity check
