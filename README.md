@@ -211,6 +211,16 @@ python add_watermark_tab_10.py --m 1000
 ```bash
 python add_watermark_tab_11.py
 ```
+---
+
+#### Tab. 12 in Appendix
+**Script:** add_watermark_attack_tab_12.py
+
+**Run:**
+```bash
+python add_watermark_attack_tab_12.py
+```
+
 
 ## 3) Utility / sanity scripts
 
