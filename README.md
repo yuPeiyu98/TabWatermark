@@ -202,6 +202,15 @@ python soft_robustness_tab_8.py | tee tab8.log
 ```bash
 python add_watermark_tab_10.py --m 1000
 ```
+---
+
+#### Tab. 11 in Appendix
+**Script:** add_watermark_tab_11.py
+
+**Run:**
+```bash
+python add_watermark_tab_11.py
+```
 
 ## 3) Utility / sanity scripts
 
