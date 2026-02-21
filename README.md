@@ -220,7 +220,25 @@ python add_watermark_tab_11.py
 ```bash
 python add_watermark_attack_tab_12.py
 ```
+---
 
+#### Tab. 15 in Appendix
+**Script:** rewatermark_with_plot.py
+
+**Run:**
+```bash
+python rewatermark_with_plot.py --m 1000
+```
+
+---
+
+#### Tab. 16 in Appendix
+**Script:** rewatermark_with_plot.py
+
+**Run:**
+```bash
+python rewatermark_with_plot.py --m 2000
+```
 
 ## 3) Utility / sanity scripts
 
