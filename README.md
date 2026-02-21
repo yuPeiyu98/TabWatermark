@@ -209,7 +209,7 @@ python add_watermark_tab_10.py --m 1000
 **Script:** `add_watermark.py`
 
 ```bash
-python add_watermark.py --seed 1 --m 1000
+python add_watermark.py --seed 1
 ```
 
 ---
