@@ -226,11 +226,11 @@ def main(args):
 
     # for n in [10, 100, 100]:
     #     for p in [10, 100, 1000]:
-    for n in [10, 100]:
-        for p in [10, 100]:
+    for n in [10, 100, 1000]:
+        for p in [10, 100, 1000]:
             p_no_wm_list, p_wm_list = [], []
             for __ in tqdm(range(N)):
-                p_no_wm, p_wm = simulateRewatermarkMultiColData(n=n, p=p, m=2000, rem=100, gamma=0.5)
+                p_no_wm, p_wm = simulateRewatermarkMultiColData(n=n, p=p, m=args.m, rem=100, gamma=0.5)
                 p_no_wm_list.append(p_no_wm)
                 p_wm_list.append(p_wm)
             print("############# n = {}, p = {} #############".format(n, p))
