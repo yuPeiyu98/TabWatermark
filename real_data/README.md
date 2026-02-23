@@ -5,7 +5,7 @@ This repository contains the implementation of watermarking methods for syntheti
 ## Project Structure
 
 ```
-tabular_watermark/
+real_data/
 ├── watermark.py           # Core watermarking functions
 ├── run_experiment.py      # Common experiment utilities (used in Table 2)
 ├── code_figure_6.py      # Code for visualize spike columns (used in Figure 6)
