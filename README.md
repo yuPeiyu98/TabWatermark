@@ -113,7 +113,7 @@ python add_watermark_attack_curves_fig_5_cd.py --seed 1 --m 1000
 
 ### Tables
 
-#### Tab. 1 & Tab. 3 — Random rescale response
+#### Tab. 1 & Tab. 3 in the response letter — Random rescale response
 **Script:** `random_rescale_response_tab1_tab3.py`
 
 **Run (auto-executes):**
@@ -131,7 +131,7 @@ python random_rescale_response_tab1_tab3.py | tee tab1_tab3.log
 
 ---
 
-#### Tab. 4 — Rewatermark response
+#### Tab. 4 in the response letter — Rewatermark response
 **Script:** `rewatermark_response_tab4.py`
 
 **Run (auto-executes):**
