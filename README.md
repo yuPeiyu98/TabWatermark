@@ -175,7 +175,7 @@ python p_watermark.py --seed 1 --m 1000
 
 ---
 
-#### Tab. 8 — Soft watermark robustness
+#### Tab. 8 — Soft watermark robustness (also Tab. 2 in the response letter)
 **Script:** `soft_robustness_tab_8.py`
 
 **Run:**
