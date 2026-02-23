@@ -48,7 +48,7 @@ pip install numpy scipy matplotlib seaborn scikit-learn tqdm
 
 ---
 
-## 2) Mapping from scripts to tables / figures (Note: Scripts without explicit labels correspond to tables and figures in the main text. Scripts with labels indicate tables and figures that may appear in the response letter or appendix.)
+## 2) Mapping from scripts to tables / figures (Note: Scripts without special labels correspond to tables and figures in the manuscript (including both the main text and appendix). Scripts associated with the response letter are explicitly labeled.)
 
 ### Figures
 
