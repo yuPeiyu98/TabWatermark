@@ -133,15 +133,4 @@ Detection uses chi-squared hypothesis testing:
 - `m`: Number of intervals for quantization (default: 1000)
 - `delta`: Tolerance for column filtering (default: 0.005)
 
-## Citation
-
-If you use this code, please cite:
-
-```bibtex
-@article{he2024watermarking, 
-title={Watermarking Generative Tabular Data}, 
-author={He, H. and Yu, P. and Ren, J. and Wu, Y. N. and Cheng, G.}, 
-journal={arXiv preprint arXiv:2405.14018}, 
-year={2024} }
-```
 
