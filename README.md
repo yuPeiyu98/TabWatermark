@@ -33,7 +33,7 @@ Most figure scripts **save `.png` files** to the current working directory.
 ## 1) Environment setup
 
 ### Python
-Use **Python 3.9+** (3.10/3.11 recommended).
+Use **Python 3.10+** (3.10/3.11 recommended).
 
 ### Dependencies
 From the root folder:
