@@ -246,8 +246,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', type=int, default=1, help='random seed')
-    # parser.add_argument('--dataset', type=str, default='cifar10')
-    # parser.add_argument('--data_path', type=str, default='../../noise_mixture_nce/ncebm_torch/data', help='data path')
+   
     
     # gridding parameters
     parser.add_argument('--m', type=int, default=1000, help='')
