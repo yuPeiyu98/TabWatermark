@@ -15,7 +15,8 @@ real_data/
 │   ├── exp_rewm_attack.py          # Re-watermarking attack (used in Table 17)
 │   ├── exp_noise_attack.py         # Additive noise attack (used in Table 2 and 3)
 │   ├── exp_wasserstein.py         # Evaluate wasserstein distance (used in Tables 1, 13, and 14)
-│   └── exp_soft_watermark.py       # Soft watermarking experiment (used in Table 19)
+│   ├── exp_soft_watermark.py       # Soft watermarking experiment (used in Table 19)
+│   └── exp_utility_eval.py         # Utility evaluation before/after watermarking (used in Table 4)
 └── README.md
 ```
 
@@ -67,22 +68,29 @@ python exp_wasserstein.py
 ```
 ### Utility Evaluation Before and After Watermarking (used in Table 4)
 
-We evaluate the utility of synthetic tabular data using the official utility
-evaluation pipeline provided by the TabDDPM repository.
+We evaluate the machine-learning utility of the synthetic data using the
+CatBoost evaluation protocol from TabDDPM (`eval_type='synthetic'`): a CatBoost
+model is trained on the **synthetic** training data and scored on the **real**
+test set. This evaluation is fully reproduced by `scripts/exp_utility_eval.py`,
+which follows the original TabDDPM repository, including its tuned CatBoost
+hyper-parameters.
 
-The evaluation procedure is as follows:
+```bash
+cd scripts
+python exp_utility_eval.py
+```
 
-1. Train tabular generative models (TabDDPM / CTGAN / TVAE) and generate synthetic
-   datasets following the original TabDDPM implementation.
-2. Measure the utility of the generated data using TabDDPM's provided evaluation
-   code (https://github.com/yandex-research/tab-ddpm/blob/main/scripts/eval_catboost.py). 
-3. Apply our watermarking method to the generated synthetic data.
-4. Replace the original synthetic data with the watermarked version and
-   re-run the same TabDDPM utility evaluation code.
+Before running, download and extract the original TabDDPM data, then set the two
+paths at the top of the script:
 
-The only difference between the two evaluations is the presence of watermarking
-in the synthetic data. All evaluation metrics, models, and procedures remain
-unchanged.
+- `DATA_PATH`: original TabDDPM data, where `DATA_PATH/<task>/` provides
+  `X_num_val.npy`, `X_num_test.npy`, `y_val.npy`, `y_test.npy`, and `info.json`.
+  These files are available from the TabDDPM GitHub project.
+- `BASE_PATH`: synthetic data directory.
+
+The metric follows TabDDPM per task: R2 for the regression tasks (california,
+house) and macro F1 for the classification tasks (gesture, higgs-small,
+miniboone, wilt).
 
 ### Using Core Functions
 
