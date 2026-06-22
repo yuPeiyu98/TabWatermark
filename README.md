@@ -30,10 +30,10 @@ Most figure scripts **save `.png` files** to the current working directory.
 
 | Result | Location | Script |
 |---|---|---|
-| Fig. 3 | Manuscript | `kde_plot_fig_3.py` |
-| Fig. 4 | Manuscript | `heatmap_plot_fig_4.py` |
-| Fig. 5(a,b) | Manuscript | `add_watermark_curves_fig_5_ab.py` |
-| Fig. 5(c,d) | Manuscript | `add_watermark_attack_curves_fig_5_cd.py` |
+| Fig. 3 | Main paper | `kde_plot_fig_3.py` |
+| Fig. 4 | Main paper | `heatmap_plot_fig_4.py` |
+| Fig. 5(a,b) | Main paper | `add_watermark_curves_fig_5_ab.py` |
+| Fig. 5(c,d) | Main paper | `add_watermark_attack_curves_fig_5_cd.py` |
 | Tab. 5 | Appendix | `gamma_watermark_guessing_attack_tab_5.py` |
 | Tab. 8--13 | Appendix | `Tab_8-13.py` |
 | Tab. 15 | Appendix | `add_watermark_tab_15.py` |
