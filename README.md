@@ -136,12 +136,17 @@ python gamma_watermark_guessing_attack_tab_5.py --seed 1 --m 1000 | tee tab5.log
 
 ---
 
-#### Tab. 8--13 — Soft watermark utility--robustness trade-off
+#### Tab. 8--13 in Appendix — Soft watermark utility--robustness trade-off
 **Script:** `Tab_8-13.py`
 
 **Run:**
 ```bash
 python Tab_8-13.py --seed 20260608
+```
+
+**Outputs:**
+- Printed fixed-m and adaptive-m(q) summary tables for m_hard = 500, 1000, 1500
+- CSV summary saved to `q1_soft_watermark_multi_m_summary/all_summary.csv`
 
 ---
 
