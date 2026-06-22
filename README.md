@@ -136,7 +136,7 @@ python gamma_watermark_guessing_attack_tab_5.py --seed 1 --m 1000 | tee tab5.log
 
 ---
 
-#### Tab. 8--13 in Appendix — Soft watermark utility--robustness trade-off
+#### Tab. 8--13 — Soft watermark utility--robustness trade-off
 **Script:** `Tab_8-13.py`
 
 **Run:**
