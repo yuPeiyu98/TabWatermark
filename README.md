@@ -195,7 +195,7 @@ python rewatermark_with_plot.py --m 1000
 python rewatermark_with_plot.py --m 2000
 ```
 
-#### Tab. 18 in the Appendix - q-Watermark sensitivity table
+#### Tab. 23 
 **Script:** `p_watermark.py`
 
 **Run:**
@@ -204,7 +204,7 @@ python p_watermark.py --seed 1 --m 1000
 ```
 
 **Outputs:**
-- Printed TPR, TNR, and AUC for different q settings(Table 18 in the Appendix)
+- Printed TPR, TNR, and AUC for different q settings(Table 23 in the Appendix)
 
 ---
 
