@@ -116,35 +116,6 @@ python add_watermark_attack_curves_fig_5_cd.py --seed 1 --m 1000
 
 ### Tables
 
-#### Tab. 1 & Tab. 3 in the response letter — Random rescale response
-**Script:** `random_rescale_response_tab1_tab3.py`
-
-**Run (auto-executes):**
-```bash
-python random_rescale_response_tab1_tab3.py
-```
-
-**Outputs:**
-- Printed TPR, TNR, and AUC for each (n, p)
-
-Recommended:
-```bash
-python random_rescale_response_tab1_tab3.py | tee tab1_tab3.log
-```
-
----
-
-#### Tab. 4 in the response letter — Rewatermark response
-**Script:** `rewatermark_response_tab4.py`
-
-**Run (auto-executes):**
-```bash
-python rewatermark_response_tab4.py
-```
-
-**Outputs:**
-- Printed AUC values for each (n, p)
-
 ---
 
 #### Tab. 5 — Gamma watermark guessing attack
