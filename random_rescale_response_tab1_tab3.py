@@ -238,4 +238,10 @@ def main(seed=1, m=2000):
             scores = 1 - np.array(p_wm_list + p_no_wm_list)
             print("AUC: {:.5f}".format(roc_auc_score(y, scores)))
 
-main(seed=1, m=500)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--seed", type=int, default=1)
+    parser.add_argument("--m", type=int, default=2000)
+
+    args = parser.parse_args()
+    main(seed=args.seed, m=args.m)
