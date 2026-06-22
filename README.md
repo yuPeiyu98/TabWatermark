@@ -26,6 +26,23 @@ Scripts covered here:
 Most table scripts **print results to stdout**.  
 Most figure scripts **save `.png` files** to the current working directory.
 
+## Mapping from results to scripts
+
+| Result | Location | Script |
+|---|---|---|
+| Fig. 3 | Manuscript | `kde_plot_fig_3.py` |
+| Fig. 4 | Manuscript | `heatmap_plot_fig_4.py` |
+| Fig. 5(a,b) | Manuscript | `add_watermark_curves_fig_5_ab.py` |
+| Fig. 5(c,d) | Manuscript | `add_watermark_attack_curves_fig_5_cd.py` |
+| Tab. 5 | Appendix | `gamma_watermark_guessing_attack_tab_5.py` |
+| Tab. 8--13 | Appendix | `Tab_8-13.py` |
+| Tab. 15 | Appendix | `add_watermark_tab_15.py` |
+| Tab. 16 | Appendix | `add_watermark_tab_16.py` |
+| Tab. 17 | Appendix | `add_watermark_attack_tab_17.py` |
+| Tab. 20 | Appendix | `rewatermark_with_plot.py` |
+| Tab. 21 | Appendix | `rewatermark_with_plot.py` |
+| Tab. 23 | Appendix | `p_watermark.py` |
+
 ---
 
 ## 1) Environment setup
