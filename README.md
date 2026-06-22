@@ -177,6 +177,24 @@ python add_watermark_attack_tab_17.py
 ```
 ---
 
+#### Tab. 20 
+**Script:** rewatermark_with_plot.py
+
+**Run:**
+```bash
+python rewatermark_with_plot.py --m 1000
+```
+
+---
+
+#### Tab. 21 in Appendix
+**Script:** rewatermark_with_plot.py
+
+**Run:**
+```bash
+python rewatermark_with_plot.py --m 2000
+```
+
 #### Tab. 18 in the Appendix - q-Watermark sensitivity table
 **Script:** `p_watermark.py`
 
@@ -211,24 +229,6 @@ Recommended:
 python soft_robustness_tab_8.py | tee tab8.log
 ```
 ---
-
-#### Tab. 15 in Appendix
-**Script:** rewatermark_with_plot.py
-
-**Run:**
-```bash
-python rewatermark_with_plot.py --m 1000
-```
-
----
-
-#### Tab. 16 in Appendix
-**Script:** rewatermark_with_plot.py
-
-**Run:**
-```bash
-python rewatermark_with_plot.py --m 2000
-```
 
 ## 3) Utility / sanity scripts
 
