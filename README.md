@@ -208,28 +208,6 @@ python p_watermark.py --seed 1 --m 1000
 
 ---
 
-#### Tab. 8 in Appendix — Soft watermark robustness (also Tab. 2 in the response letter)
-**Script:** `soft_robustness_tab_8.py`
-
-**Run:**
-```bash
-python soft_robustness_tab_8.py
-```
-
-**Outputs:**
-- Printed summary table with columns:
-  - q
-  - m
-  - sigma_break
-  - W1_wm
-  - Delta_W1
-
-Recommended:
-```bash
-python soft_robustness_tab_8.py | tee tab8.log
-```
----
-
 ## 3) Utility / sanity scripts
 
 ### Basic watermark sanity check
