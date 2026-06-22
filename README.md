@@ -21,7 +21,7 @@ Scripts covered here:
 - `soft_robustness_tab_8.py`
 - `add_watermark_tab_15.py`
 - `add_watermark_tab_16.py`
-- `add_watermark_attack_tab_12.py`
+- `add_watermark_attack_tab_17.py`
 
 Most table scripts **print results to stdout**.  
 Most figure scripts **save `.png` files** to the current working directory.
