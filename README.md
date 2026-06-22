@@ -187,7 +187,7 @@ python rewatermark_with_plot.py --m 1000
 
 ---
 
-#### Tab. 21 in Appendix
+#### Tab. 21 
 **Script:** rewatermark_with_plot.py
 
 **Run:**
