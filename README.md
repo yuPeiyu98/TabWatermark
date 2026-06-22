@@ -17,6 +17,7 @@ Scripts covered here:
 - `heatmap_plot_fig_4.py`
 - `rewatermark_with_plot.py`
 - `gamma_watermark_guessing_attack_tab_5.py`
+- `Tab_8-13.py`
 - `p_watermark.py`
 - `add_watermark_tab_15.py`
 - `add_watermark_tab_16.py`
