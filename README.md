@@ -150,7 +150,7 @@ python Tab_8-13.py --seed 20260608
 
 ---
 
-#### Tab. 15 in Appendix
+#### Tab. 15 
 **Script:** `add_watermark_tab_15.py`
 
 **Run:**
