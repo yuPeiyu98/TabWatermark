@@ -150,6 +150,14 @@ python Tab_8-13.py --seed 20260608
 
 ---
 
+#### Tab. 15 in Appendix
+**Script:** `add_watermark_tab_15.py`
+
+**Run:**
+```bash
+python add_watermark_tab_15.py --m 1000
+```
+---
 
 #### Tab. 18 in the Appendix - q-Watermark sensitivity table
 **Script:** `p_watermark.py`
@@ -183,16 +191,6 @@ python soft_robustness_tab_8.py
 Recommended:
 ```bash
 python soft_robustness_tab_8.py | tee tab8.log
-```
-
----
-
-#### Tab. 10 in Appendix
-**Script:** `add_watermark_tab_10.py`
-
-**Run:**
-```bash
-python add_watermark_tab_10.py --m 1000
 ```
 ---
 
