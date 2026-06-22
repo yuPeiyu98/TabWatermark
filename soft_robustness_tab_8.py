@@ -235,7 +235,7 @@ def find_break_sigma_grid(
     return None
 
 
-def run_experiment():
+def run_experiment(seed: int = 123):
     q_list = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
 
     m_hard = next_even(500)
@@ -248,16 +248,22 @@ def run_experiment():
 
     for q in q_list:
         m = next_even(max(2, int(round(q * m_hard))))
-        rng_key = np.random.default_rng(2026 + m)
+
+        # seed-controlled green list
+        rng_key = np.random.default_rng(seed + 2026 + m)
         green = make_green_is_left(m, rng_key)
 
         print(f"\n===== q={q}, m={m} =====")
+
+        # seed-controlled break search
         sigma_break = find_break_sigma_grid(
-            n, K, q, m, green, auc_thresh
+            n, K, q, m, green, auc_thresh,
+            seed0=seed + 12345,
         )
         print(f"sigma_break = {sigma_break}")
 
-        rng = np.random.default_rng(123)
+        # seed-controlled W1 / Delta_W1 metric
+        rng = np.random.default_rng(seed)
         W1_wm, Delta_W1 = w1_metrics_repeat_1d(
             rng, n_fid, m, q, green, sigma_break, reps=5
         )
@@ -286,4 +292,10 @@ def run_experiment():
     return results
 
 if __name__ == "__main__":
-  run_experiment()
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--seed", type=int, default=123)
+
+    args = parser.parse_args()
+    run_experiment(seed=args.seed)
