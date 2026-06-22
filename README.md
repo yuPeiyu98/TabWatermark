@@ -18,7 +18,6 @@ Scripts covered here:
 - `rewatermark_with_plot.py`
 - `gamma_watermark_guessing_attack_tab_5.py`
 - `p_watermark.py`
-- `soft_robustness_tab_8.py`
 - `add_watermark_tab_15.py`
 - `add_watermark_tab_16.py`
 - `add_watermark_attack_tab_17.py`
