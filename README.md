@@ -46,8 +46,11 @@ pip install -U pip
 pip install numpy scipy matplotlib seaborn scikit-learn tqdm
 ```
 
-We provide `requirements.txt` with the exact package versions used to produce the reported results.
+We provide `requirements.txt` with the exact package versions used to produce the reported results. To install the same package versions as used in our experiments, run:
 
+```bash
+pip install -r requirements.txt
+```
 ---
 
 ## 2) Mapping from scripts to tables / figures (Note: Scripts without special labels correspond to tables and figures in the manuscript (including both the main text and appendix). Scripts associated with the response letter are explicitly labeled.)
