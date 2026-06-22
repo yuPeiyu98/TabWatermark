@@ -159,6 +159,16 @@ python add_watermark_tab_15.py --m 1000
 ```
 ---
 
+#### Tab. 16 
+**Script:** add_watermark_tab_16.py
+
+**Run:**
+```bash
+python add_watermark_tab_16.py
+```
+---
+
+
 #### Tab. 18 in the Appendix - q-Watermark sensitivity table
 **Script:** `p_watermark.py`
 
@@ -191,15 +201,6 @@ python soft_robustness_tab_8.py
 Recommended:
 ```bash
 python soft_robustness_tab_8.py | tee tab8.log
-```
----
-
-#### Tab. 11 in Appendix
-**Script:** add_watermark_tab_11.py
-
-**Run:**
-```bash
-python add_watermark_tab_11.py
 ```
 ---
 
