@@ -168,7 +168,7 @@ python add_watermark_tab_16.py
 ```
 ---
 
-#### Tab. 17 in Appendix
+#### Tab. 17 
 **Script:** add_watermark_attack_tab_17.py
 
 **Run:**
