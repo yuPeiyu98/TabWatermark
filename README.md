@@ -15,8 +15,6 @@ Scripts covered here:
 - `add_watermark_attack_curves_fig_5_cd.py`
 - `kde_plot_fig_3.py`
 - `heatmap_plot_fig_4.py`
-- `random_rescale_response_tab1_tab3.py`
-- `rewatermark_response_tab4.py`
 - `rewatermark_with_plot.py`
 - `gamma_watermark_guessing_attack_tab_5.py`
 - `p_watermark.py`
