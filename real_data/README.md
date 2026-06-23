@@ -12,10 +12,10 @@ real_data/
 ├── scripts/
 │   ├── exp_know_guess_attack.py    # Guess attack (known mean/std) (used in Table 6)
 │   ├── exp_guess_attack.py         # Guess attack (unknown mean/std) (used in Table 7)
-│   ├── exp_rewm_attack.py          # Re-watermarking attack (used in Table 17)
+│   ├── exp_rewm_attack.py          # Re-watermarking attack (used in Table 22)
 │   ├── exp_noise_attack.py         # Additive noise attack (used in Table 2 and 3)
 │   ├── exp_wasserstein.py         # Evaluate wasserstein distance (used in Tables 1, 13, and 14)
-│   ├── exp_soft_watermark.py       # Soft watermarking experiment (used in Table 19)
+│   ├── exp_soft_watermark.py       # Soft watermarking experiment (used in Table 24)
 │   └── exp_utility_eval.py         # Utility evaluation before/after watermarking (used in Table 4)
 └── README.md
 ```
