@@ -196,11 +196,11 @@ def main(args):
     T = args.T
     run_seeds = [1, 2, 3]
 
-    # store single-col AFTER-attack AUCs (the Table 12 target)
+    # store single-col AFTER-attack AUCs (the Table 17 target)
     sing_after_auc = {(pr, s): [] for pr in pro_list for s in s_list}
 
     t0 = time.time()
-    print(f"\n[Table12] single-column WM, ROC-AUC after attack")
+    print(f"\n[Table17] single-column WM, ROC-AUC after attack")
     print(f"n={n}, c(p)={c}, m={args.m}, T={T}")
     print("-" * 70)
 
