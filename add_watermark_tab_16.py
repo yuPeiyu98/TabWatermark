@@ -152,7 +152,7 @@ def calc_tpr_tnr_auc(wm_pvals, nwm_pvals, alpha=0.005):
 
 
 def main(args):
-    # Table 11 layout in your screenshot: n fixed to 100, p in {100, 1000, 10000}
+    # Table 16 layout in your screenshot: n fixed to 100, p in {100, 1000, 10000}
     n = 100
     p_list = [100, 1000, 10000]
 
@@ -190,7 +190,7 @@ def main(args):
         row_auc.append(f"{auc:.3f}")
 
     # Print in the same style as the paper table
-    print("Table 11: Detection results on simulated high dimensional tables")
+    print("Table 16: Detection results on simulated high dimensional tables")
     print(f"{'n×p':>6}  {'100×100':>10}  {'100×1000':>10}  {'100×10000':>11}")
     print(f"{'TPR/TNR':>6}  {row_tpr_tnr[0]:>10}  {row_tpr_tnr[1]:>10}  {row_tpr_tnr[2]:>11}")
     print(f"{'AUC':>6}  {row_auc[0]:>10}  {row_auc[1]:>10}  {row_auc[2]:>11}")
