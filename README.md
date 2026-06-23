@@ -34,14 +34,26 @@ Most figure scripts **save `.png` files** to the current working directory.
 | Fig. 4 | Main paper | `heatmap_plot_fig_4.py` |
 | Fig. 5(a,b) | Main paper | `add_watermark_curves_fig_5_ab.py` |
 | Fig. 5(c,d) | Main paper | `add_watermark_attack_curves_fig_5_cd.py` |
+| Fig. 6 | Appendix | `real_data/code_figure_6.py` |
+| Tab. 1 | Main paper | `real_data/scripts/exp_wasserstein.py` |
+| Tab. 2 | Main paper | `real_data/scripts/exp_noise_attack.py` |
+| Tab. 3 | Main paper | `real_data/scripts/exp_noise_attack.py` |
+| Tab. 4 | Main paper | `real_data/scripts/exp_utility_eval.py` |
 | Tab. 5 | Appendix | `gamma_watermark_guessing_attack_tab_5.py` |
+| Tab. 6 | Appendix | `real_data/scripts/exp_know_guess_attack.py` |
+| Tab. 7 | Appendix | `real_data/scripts/exp_guess_attack.py` |
 | Tab. 8--13 | Appendix | `Tab_8-13.py` |
+| Tab. 14 | Appendix | Manuscript dataset-information table; no script |
 | Tab. 15 | Appendix | `add_watermark_tab_15.py` |
 | Tab. 16 | Appendix | `add_watermark_tab_16.py` |
 | Tab. 17 | Appendix | `add_watermark_attack_tab_17.py` |
+| Tab. 18 | Appendix | `real_data/scripts/exp_wasserstein.py` |
+| Tab. 19 | Appendix | `real_data/scripts/exp_wasserstein.py` |
 | Tab. 20 | Appendix | `rewatermark_with_plot.py` |
 | Tab. 21 | Appendix | `rewatermark_with_plot.py` |
+| Tab. 22 | Appendix | `real_data/scripts/exp_rewm_attack.py` |
 | Tab. 23 | Appendix | `p_watermark.py` |
+| Tab. 24 | Appendix | `real_data/scripts/exp_soft_watermark.py` |
 
 ---
 
