@@ -70,7 +70,7 @@ python -m venv .venv
 source .venv/bin/activate   # Windows: .\.venv\Scripts\Activate.ps1
 
 pip install -U pip
-pip install numpy scipy matplotlib seaborn scikit-learn tqdm pandas
+pip install catboost numpy scipy matplotlib seaborn scikit-learn tqdm pandas
 ```
 
 We provide `requirements.txt` with the exact package versions used to produce the reported results. To install the same package versions as used in our experiments, run:
