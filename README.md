@@ -80,7 +80,7 @@ pip install -r requirements.txt
 ```
 ---
 
-## 2) Mapping from scripts to tables / figures (Note: Scripts without special labels correspond to tables and figures in the manuscript (including both the main text and appendix). Scripts associated with the response letter are explicitly labeled.)
+## 2) Mapping from scripts to tables / figures (Note: Scripts without special labels correspond to tables and figures in the manuscript, including both the main text and appendix).
 
 ### Figures
 
